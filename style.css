@@ -29,7 +29,7 @@
   margin: 30px auto 20px auto;
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.1);
   letter-spacing: 1px;
-  animation: popTeam 1s cubic-bezier(0.4, 1.4, 0.6, 1);
+  animation: popTeam 0.6s cubic-bezier(0.4, 1.4, 0.6, 1);
 }
 
 .celebration-message .winner {

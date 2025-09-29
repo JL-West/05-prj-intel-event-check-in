@@ -1,15 +1,15 @@
 // Reset button logic
-const resetBtn = document.getElementById('resetBtn');
+const resetBtn = document.getElementById("resetBtn");
 if (resetBtn) {
-  resetBtn.addEventListener('click', function () {
-    if (confirm('Are you sure you want to reset all attendance data?')) {
+  resetBtn.addEventListener("click", function () {
+    if (confirm("Are you sure you want to reset all attendance data?")) {
       attendees = [];
       teamCounts = { water: 0, zero: 0, power: 0 };
-      localStorage.removeItem('attendees');
-      localStorage.removeItem('teamCounts');
+      localStorage.removeItem("attendees");
+      localStorage.removeItem("teamCounts");
       updateDisplay();
-      greeting.textContent = 'Attendance has been reset.';
-      greeting.style.display = 'block';
+      greeting.textContent = "Attendance has been reset.";
+      greeting.style.display = "block";
     }
   });
 }
@@ -17,16 +17,16 @@ if (resetBtn) {
 let attendees = [];
 
 // Try to load from localStorage
-if (localStorage.getItem('attendees')) {
+if (localStorage.getItem("attendees")) {
   try {
-    attendees = JSON.parse(localStorage.getItem('attendees'));
+    attendees = JSON.parse(localStorage.getItem("attendees"));
   } catch (e) {
     attendees = [];
   }
 }
 
 // Get celebration element
-const celebration = document.getElementById('celebration');
+const celebration = document.getElementById("celebration");
 const maxAttendees = 50;
 
 // Team counts
@@ -36,37 +36,37 @@ let teamCounts = {
   power: 0,
 };
 
-if (localStorage.getItem('teamCounts')) {
+if (localStorage.getItem("teamCounts")) {
   try {
-    teamCounts = JSON.parse(localStorage.getItem('teamCounts'));
+    teamCounts = JSON.parse(localStorage.getItem("teamCounts"));
   } catch (e) {
     teamCounts = { water: 0, zero: 0, power: 0 };
   }
 }
 
 // Get DOM elements
-const checkInForm = document.getElementById('checkInForm');
-const attendeeCountSpan = document.getElementById('attendeeCount');
-const waterCountSpan = document.getElementById('waterCount');
-const zeroCountSpan = document.getElementById('zeroCount');
-const powerCountSpan = document.getElementById('powerCount');
-const progressBar = document.getElementById('progressBar');
-const greeting = document.getElementById('greeting');
-const waterList = document.getElementById('waterList');
-const zeroList = document.getElementById('zeroList');
-const powerList = document.getElementById('powerList');
-const waterCard = document.querySelector('.team-card.water');
-const zeroCard = document.querySelector('.team-card.zero');
-const powerCard = document.querySelector('.team-card.power');
+const checkInForm = document.getElementById("checkInForm");
+const attendeeCountSpan = document.getElementById("attendeeCount");
+const waterCountSpan = document.getElementById("waterCount");
+const zeroCountSpan = document.getElementById("zeroCount");
+const powerCountSpan = document.getElementById("powerCount");
+const progressBar = document.getElementById("progressBar");
+const greeting = document.getElementById("greeting");
+const waterList = document.getElementById("waterList");
+const zeroList = document.getElementById("zeroList");
+const powerList = document.getElementById("powerList");
+const waterCard = document.querySelector(".team-card.water");
+const zeroCard = document.querySelector(".team-card.zero");
+const powerCard = document.querySelector(".team-card.power");
 
 function updateDisplay() {
   // Save to localStorage
-  localStorage.setItem('attendees', JSON.stringify(attendees));
-  localStorage.setItem('teamCounts', JSON.stringify(teamCounts));
+  localStorage.setItem("attendees", JSON.stringify(attendees));
+  localStorage.setItem("teamCounts", JSON.stringify(teamCounts));
   // Hide celebration by default
   if (celebration) {
-    celebration.style.display = 'none';
-    celebration.innerHTML = '';
+    celebration.style.display = "none";
+    celebration.innerHTML = "";
   }
   attendeeCountSpan.textContent = attendees.length;
   // Update progress bar width
@@ -76,48 +76,43 @@ function updateDisplay() {
   // If goal reached, show celebration
   if (attendees.length === maxAttendees) {
     // Find winning team
-    let winner = 'No team';
+    let winner = "No team";
     let winnerCount = 0;
-    let winnerClass = '';
+    let winnerClass = "";
     if (
       teamCounts.water >= teamCounts.zero &&
       teamCounts.water >= teamCounts.power
     ) {
-      winner = 'Team Water Wise';
+      winner = "Team Water Wise";
       winnerCount = teamCounts.water;
-      winnerClass = 'water';
+      winnerClass = "water";
     }
     if (
       teamCounts.zero > teamCounts.water &&
       teamCounts.zero >= teamCounts.power
     ) {
-      winner = 'Team Net Zero';
+      winner = "Team Net Zero";
       winnerCount = teamCounts.zero;
-      winnerClass = 'zero';
+      winnerClass = "zero";
     }
     if (
       teamCounts.power > teamCounts.water &&
       teamCounts.power > teamCounts.zero
     ) {
-      winner = 'Team Renewables';
+      winner = "Team Renewables";
       winnerCount = teamCounts.power;
-      winnerClass = 'power';
+      winnerClass = "power";
     }
     if (celebration) {
-      // Remove and re-add the class to re-trigger animation
-      celebration.classList.remove('celebration-message');
-      // Force reflow
-      void celebration.offsetWidth;
       celebration.innerHTML = `🎉 <span class="winner ${winnerClass}">${winner}</span> wins with ${winnerCount} check-ins! 🎉`;
-      celebration.style.display = 'block';
-      celebration.classList.add('celebration-message');
+      celebration.style.display = "block";
     }
   }
 
   // Clear lists
-  waterList.innerHTML = '';
-  zeroList.innerHTML = '';
-  powerList.innerHTML = '';
+  waterList.innerHTML = "";
+  zeroList.innerHTML = "";
+  powerList.innerHTML = "";
 
   // Group attendees by team
   const teamAttendees = {
@@ -131,49 +126,49 @@ function updateDisplay() {
 
   // Add numbered attendee names to each team list
   [
-    { team: 'water', list: waterList },
-    { team: 'zero', list: zeroList },
-    { team: 'power', list: powerList },
+    { team: "water", list: waterList },
+    { team: "zero", list: zeroList },
+    { team: "power", list: powerList },
   ].forEach(function (obj) {
     teamAttendees[obj.team].forEach(function (name, idx) {
-      const li = document.createElement('li');
+      const li = document.createElement("li");
       li.textContent = `${idx + 1}. ${name}`;
       obj.list.appendChild(li);
     });
   });
 }
 
-checkInForm.addEventListener('submit', function (event) {
+checkInForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  const nameInput = document.getElementById('attendeeName');
-  const teamSelect = document.getElementById('teamSelect');
+  const nameInput = document.getElementById("attendeeName");
+  const teamSelect = document.getElementById("teamSelect");
   const name = nameInput.value.trim();
   const team = teamSelect.value;
   // Animate the selected team card (after team is defined and validated)
   let cardToAnimate = null;
-  if (team === 'water') {
+  if (team === "water") {
     cardToAnimate = waterCard;
-  } else if (team === 'zero') {
+  } else if (team === "zero") {
     cardToAnimate = zeroCard;
-  } else if (team === 'power') {
+  } else if (team === "power") {
     cardToAnimate = powerCard;
   }
   if (cardToAnimate) {
-    cardToAnimate.classList.remove('animate');
+    cardToAnimate.classList.remove("animate");
     // Force reflow to restart animation
     void cardToAnimate.offsetWidth;
-    cardToAnimate.classList.add('animate');
+    cardToAnimate.classList.add("animate");
   }
 
-  if (name === '' || team === '') {
-    greeting.textContent = 'Please enter your name and select a team.';
-    greeting.style.display = 'block';
+  if (name === "" || team === "") {
+    greeting.textContent = "Please enter your name and select a team.";
+    greeting.style.display = "block";
     return;
   }
 
   if (attendees.length >= maxAttendees) {
-    greeting.textContent = 'Check-in is full!';
-    greeting.style.display = 'block';
+    greeting.textContent = "Check-in is full!";
+    greeting.style.display = "block";
     return;
   }
 
@@ -183,7 +178,7 @@ checkInForm.addEventListener('submit', function (event) {
   });
   if (alreadyCheckedIn) {
     greeting.textContent = `Welcome back, ${name}! You are already checked in.`;
-    greeting.style.display = 'block';
+    greeting.style.display = "block";
     return;
   }
 
@@ -192,22 +187,22 @@ checkInForm.addEventListener('submit', function (event) {
   teamCounts[team]++;
   updateDisplay();
   // Save to localStorage after update
-  localStorage.setItem('attendees', JSON.stringify(attendees));
-  localStorage.setItem('teamCounts', JSON.stringify(teamCounts));
+  localStorage.setItem("attendees", JSON.stringify(attendees));
+  localStorage.setItem("teamCounts", JSON.stringify(teamCounts));
   // Personalized greeting
-  let teamLabel = '';
-  if (team === 'water') {
-    teamLabel = 'Team Water Wise';
-  } else if (team === 'zero') {
-    teamLabel = 'Team Net Zero';
-  } else if (team === 'power') {
-    teamLabel = 'Team Renewables';
+  let teamLabel = "";
+  if (team === "water") {
+    teamLabel = "Team Water Wise";
+  } else if (team === "zero") {
+    teamLabel = "Team Net Zero";
+  } else if (team === "power") {
+    teamLabel = "Team Renewables";
   }
   greeting.textContent = `Thank you for checking in, ${name}! You are now part of ${teamLabel}.`;
-  greeting.style.display = 'block';
+  greeting.style.display = "block";
   // Reset form
-  nameInput.value = '';
-  teamSelect.value = '';
+  nameInput.value = "";
+  teamSelect.value = "";
 });
 
 // Initialize display
