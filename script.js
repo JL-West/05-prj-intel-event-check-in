@@ -1,5 +1,8 @@
 // Store attendees in an array
 const attendees = [];
+
+// Get celebration element
+const celebration = document.getElementById("celebration");
 const maxAttendees = 50;
 
 // Team counts
@@ -25,10 +28,42 @@ const zeroCard = document.querySelector(".team-card.zero");
 const powerCard = document.querySelector(".team-card.power");
 
 function updateDisplay() {
+  // Hide celebration by default
+  if (celebration) {
+    celebration.style.display = "none";
+    celebration.innerHTML = "";
+  }
   attendeeCountSpan.textContent = attendees.length;
   // Update progress bar width
   const percent = (attendees.length / maxAttendees) * 100;
   progressBar.style.width = `${percent}%`;
+
+  // If goal reached, show celebration
+  if (attendees.length === maxAttendees) {
+    // Find winning team
+    let winner = 'No team';
+    let winnerCount = 0;
+    let winnerClass = '';
+    if (teamCounts.water >= teamCounts.zero && teamCounts.water >= teamCounts.power) {
+      winner = 'Team Water Wise';
+      winnerCount = teamCounts.water;
+      winnerClass = 'water';
+    }
+    if (teamCounts.zero > teamCounts.water && teamCounts.zero >= teamCounts.power) {
+      winner = 'Team Net Zero';
+      winnerCount = teamCounts.zero;
+      winnerClass = 'zero';
+    }
+    if (teamCounts.power > teamCounts.water && teamCounts.power > teamCounts.zero) {
+      winner = 'Team Renewables';
+      winnerCount = teamCounts.power;
+      winnerClass = 'power';
+    }
+    if (celebration) {
+      celebration.innerHTML = `🎉 <span class="winner ${winnerClass}">${winner}</span> wins with ${winnerCount} check-ins! 🎉`;
+      celebration.style.display = "block";
+    }
+  }
 
   // Clear lists
   waterList.innerHTML = "";
