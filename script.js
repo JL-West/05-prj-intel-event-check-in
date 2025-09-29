@@ -60,7 +60,12 @@ function updateDisplay() {
 }
 
 checkInForm.addEventListener("submit", function (event) {
-  // Animate the selected team card
+  event.preventDefault();
+  const nameInput = document.getElementById("attendeeName");
+  const teamSelect = document.getElementById("teamSelect");
+  const name = nameInput.value.trim();
+  const team = teamSelect.value;
+  // Animate the selected team card (after team is defined and validated)
   let cardToAnimate = null;
   if (team === "water") {
     cardToAnimate = waterCard;
@@ -75,11 +80,6 @@ checkInForm.addEventListener("submit", function (event) {
     void cardToAnimate.offsetWidth;
     cardToAnimate.classList.add("animate");
   }
-  event.preventDefault();
-  const nameInput = document.getElementById("attendeeName");
-  const teamSelect = document.getElementById("teamSelect");
-  const name = nameInput.value.trim();
-  const team = teamSelect.value;
 
   if (name === "" || team === "") {
     greeting.textContent = "Please enter your name and select a team.";
