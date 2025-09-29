@@ -23,9 +23,6 @@ const powerList = document.getElementById("powerList");
 
 function updateDisplay() {
   attendeeCountSpan.textContent = attendees.length;
-  waterCountSpan.textContent = teamCounts.water;
-  zeroCountSpan.textContent = teamCounts.zero;
-  powerCountSpan.textContent = teamCounts.power;
   // Update progress bar width
   const percent = (attendees.length / maxAttendees) * 100;
   progressBar.style.width = `${percent}%`;
@@ -35,17 +32,27 @@ function updateDisplay() {
   zeroList.innerHTML = "";
   powerList.innerHTML = "";
 
-  // Add attendee names to each team list
-  attendees.forEach(function (att) {
-    const li = document.createElement("li");
-    li.textContent = att.name;
-    if (att.team === "water") {
-      waterList.appendChild(li);
-    } else if (att.team === "zero") {
-      zeroList.appendChild(li);
-    } else if (att.team === "power") {
-      powerList.appendChild(li);
-    }
+  // Group attendees by team
+  const teamAttendees = {
+    water: [],
+    zero: [],
+    power: []
+  };
+  attendees.forEach(function(att) {
+    teamAttendees[att.team].push(att.name);
+  });
+
+  // Add numbered attendee names to each team list
+  [
+    { team: 'water', list: waterList },
+    { team: 'zero', list: zeroList },
+    { team: 'power', list: powerList }
+  ].forEach(function(obj) {
+    teamAttendees[obj.team].forEach(function(name, idx) {
+      const li = document.createElement('li');
+      li.textContent = `${idx + 1}. ${name}`;
+      obj.list.appendChild(li);
+    });
   });
 }
 
