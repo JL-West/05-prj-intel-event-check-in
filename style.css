@@ -1,3 +1,7 @@
+input::placeholder {
+  color: #fff;
+  opacity: 1;
+}
 /* Remove dots from attendee lists */
 .attendee-list {
   list-style: none;
