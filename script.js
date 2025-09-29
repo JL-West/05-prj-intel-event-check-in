@@ -36,20 +36,20 @@ function updateDisplay() {
   const teamAttendees = {
     water: [],
     zero: [],
-    power: []
+    power: [],
   };
-  attendees.forEach(function(att) {
+  attendees.forEach(function (att) {
     teamAttendees[att.team].push(att.name);
   });
 
   // Add numbered attendee names to each team list
   [
-    { team: 'water', list: waterList },
-    { team: 'zero', list: zeroList },
-    { team: 'power', list: powerList }
-  ].forEach(function(obj) {
-    teamAttendees[obj.team].forEach(function(name, idx) {
-      const li = document.createElement('li');
+    { team: "water", list: waterList },
+    { team: "zero", list: zeroList },
+    { team: "power", list: powerList },
+  ].forEach(function (obj) {
+    teamAttendees[obj.team].forEach(function (name, idx) {
+      const li = document.createElement("li");
       li.textContent = `${idx + 1}. ${name}`;
       obj.list.appendChild(li);
     });
@@ -86,7 +86,16 @@ checkInForm.addEventListener("submit", function (event) {
   attendees.push({ name: name, team: team });
   teamCounts[team]++;
   updateDisplay();
-  greeting.textContent = `Thank you for checking in, ${name}!`;
+  // Personalized greeting
+  let teamLabel = "";
+  if (team === "water") {
+    teamLabel = "Team Water Wise";
+  } else if (team === "zero") {
+    teamLabel = "Team Net Zero";
+  } else if (team === "power") {
+    teamLabel = "Team Renewables";
+  }
+  greeting.textContent = `Thank you for checking in, ${name}! You are now part of ${teamLabel}.`;
   // Reset form
   nameInput.value = "";
   teamSelect.value = "";
