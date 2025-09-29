@@ -17,6 +17,9 @@ const zeroCountSpan = document.getElementById("zeroCount");
 const powerCountSpan = document.getElementById("powerCount");
 const progressBar = document.getElementById("progressBar");
 const greeting = document.getElementById("greeting");
+const waterList = document.getElementById("waterList");
+const zeroList = document.getElementById("zeroList");
+const powerList = document.getElementById("powerList");
 
 function updateDisplay() {
   attendeeCountSpan.textContent = attendees.length;
@@ -26,6 +29,24 @@ function updateDisplay() {
   // Update progress bar width
   const percent = (attendees.length / maxAttendees) * 100;
   progressBar.style.width = `${percent}%`;
+
+  // Clear lists
+  waterList.innerHTML = "";
+  zeroList.innerHTML = "";
+  powerList.innerHTML = "";
+
+  // Add attendee names to each team list
+  attendees.forEach(function (att) {
+    const li = document.createElement("li");
+    li.textContent = att.name;
+    if (att.team === "water") {
+      waterList.appendChild(li);
+    } else if (att.team === "zero") {
+      zeroList.appendChild(li);
+    } else if (att.team === "power") {
+      powerList.appendChild(li);
+    }
+  });
 }
 
 checkInForm.addEventListener("submit", function (event) {
