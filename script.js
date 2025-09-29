@@ -65,11 +65,13 @@ checkInForm.addEventListener("submit", function (event) {
 
   if (name === "" || team === "") {
     greeting.textContent = "Please enter your name and select a team.";
+    greeting.style.display = "block";
     return;
   }
 
   if (attendees.length >= maxAttendees) {
     greeting.textContent = "Check-in is full!";
+    greeting.style.display = "block";
     return;
   }
 
@@ -79,6 +81,7 @@ checkInForm.addEventListener("submit", function (event) {
   });
   if (alreadyCheckedIn) {
     greeting.textContent = `Welcome back, ${name}! You are already checked in.`;
+    greeting.style.display = "block";
     return;
   }
 
@@ -96,6 +99,7 @@ checkInForm.addEventListener("submit", function (event) {
     teamLabel = "Team Renewables";
   }
   greeting.textContent = `Thank you for checking in, ${name}! You are now part of ${teamLabel}.`;
+  greeting.style.display = "block";
   // Reset form
   nameInput.value = "";
   teamSelect.value = "";
