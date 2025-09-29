@@ -42,11 +42,6 @@
   color: #ffe600;
   text-shadow: 0 2px 8px #003c71, 0 0 10px #fff;
 }
-/* Team card check-in animation */
-
-  animation: popTeam 0.6s cubic-bezier(0.4, 1.4, 0.6, 1) 1;
-  box-shadow: 0 0 0 4px #00aeef44;
-}
 
 @keyframes popTeam {
   0% {
@@ -74,7 +69,7 @@
 }
 
 body {
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
   line-height: 1.6;
@@ -99,7 +94,7 @@ body {
       rgba(0, 104, 181, 0.9) 50%,
       rgba(0, 60, 116, 0.9) 100%
     ),
-    url("img/bg.jpg");
+    url('img/bg.jpg');
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -395,6 +390,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
 
 .team-card.animate {
   animation: popTeam 0.6s cubic-bezier(0.4, 1.4, 0.6, 1) 1;
