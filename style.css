@@ -1,3 +1,21 @@
+/* Reset button styling */
+.reset-btn {
+  margin: 18px auto 0 auto;
+  display: block;
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(229, 62, 62, 0.12);
+  transition: background 0.2s;
+}
+.reset-btn:hover {
+  background: #c53030;
+}
 /* Celebration message */
 .celebration-message {
   display: block;

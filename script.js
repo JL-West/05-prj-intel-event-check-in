@@ -1,3 +1,18 @@
+// Reset button logic
+const resetBtn = document.getElementById("resetBtn");
+if (resetBtn) {
+  resetBtn.addEventListener("click", function () {
+    if (confirm("Are you sure you want to reset all attendance data?")) {
+      attendees = [];
+      teamCounts = { water: 0, zero: 0, power: 0 };
+      localStorage.removeItem("attendees");
+      localStorage.removeItem("teamCounts");
+      updateDisplay();
+      greeting.textContent = "Attendance has been reset.";
+      greeting.style.display = "block";
+    }
+  });
+}
 // Store attendees in an array
 let attendees = [];
 
