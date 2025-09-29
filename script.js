@@ -20,6 +20,9 @@ const greeting = document.getElementById("greeting");
 const waterList = document.getElementById("waterList");
 const zeroList = document.getElementById("zeroList");
 const powerList = document.getElementById("powerList");
+const waterCard = document.querySelector(".team-card.water");
+const zeroCard = document.querySelector(".team-card.zero");
+const powerCard = document.querySelector(".team-card.power");
 
 function updateDisplay() {
   attendeeCountSpan.textContent = attendees.length;
@@ -57,6 +60,21 @@ function updateDisplay() {
 }
 
 checkInForm.addEventListener("submit", function (event) {
+  // Animate the selected team card
+  let cardToAnimate = null;
+  if (team === "water") {
+    cardToAnimate = waterCard;
+  } else if (team === "zero") {
+    cardToAnimate = zeroCard;
+  } else if (team === "power") {
+    cardToAnimate = powerCard;
+  }
+  if (cardToAnimate) {
+    cardToAnimate.classList.remove("animate");
+    // Force reflow to restart animation
+    void cardToAnimate.offsetWidth;
+    cardToAnimate.classList.add("animate");
+  }
   event.preventDefault();
   const nameInput = document.getElementById("attendeeName");
   const teamSelect = document.getElementById("teamSelect");

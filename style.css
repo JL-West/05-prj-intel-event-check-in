@@ -1,3 +1,27 @@
+/* Team card check-in animation */
+.team-card.animate {
+  animation: popTeam 0.6s cubic-bezier(0.4, 1.4, 0.6, 1) 1;
+  box-shadow: 0 0 0 4px #00aeef44;
+}
+
+@keyframes popTeam {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #00aeef44;
+  }
+  40% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px #00aeef44;
+  }
+  70% {
+    transform: scale(0.97);
+    box-shadow: 0 0 0 2px #00aeef44;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #00aeef44;
+  }
+}
 /* Modern reset */
 * {
   margin: 0;
