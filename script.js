@@ -41,23 +41,32 @@ function updateDisplay() {
   // If goal reached, show celebration
   if (attendees.length === maxAttendees) {
     // Find winning team
-    let winner = 'No team';
+    let winner = "No team";
     let winnerCount = 0;
-    let winnerClass = '';
-    if (teamCounts.water >= teamCounts.zero && teamCounts.water >= teamCounts.power) {
-      winner = 'Team Water Wise';
+    let winnerClass = "";
+    if (
+      teamCounts.water >= teamCounts.zero &&
+      teamCounts.water >= teamCounts.power
+    ) {
+      winner = "Team Water Wise";
       winnerCount = teamCounts.water;
-      winnerClass = 'water';
+      winnerClass = "water";
     }
-    if (teamCounts.zero > teamCounts.water && teamCounts.zero >= teamCounts.power) {
-      winner = 'Team Net Zero';
+    if (
+      teamCounts.zero > teamCounts.water &&
+      teamCounts.zero >= teamCounts.power
+    ) {
+      winner = "Team Net Zero";
       winnerCount = teamCounts.zero;
-      winnerClass = 'zero';
+      winnerClass = "zero";
     }
-    if (teamCounts.power > teamCounts.water && teamCounts.power > teamCounts.zero) {
-      winner = 'Team Renewables';
+    if (
+      teamCounts.power > teamCounts.water &&
+      teamCounts.power > teamCounts.zero
+    ) {
+      winner = "Team Renewables";
       winnerCount = teamCounts.power;
-      winnerClass = 'power';
+      winnerClass = "power";
     }
     if (celebration) {
       celebration.innerHTML = `🎉 <span class="winner ${winnerClass}">${winner}</span> wins with ${winnerCount} check-ins! 🎉`;
