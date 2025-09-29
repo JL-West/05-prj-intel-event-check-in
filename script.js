@@ -1,16 +1,33 @@
 // Store attendees in an array
-const attendees = [];
+let attendees = [];
+
+// Try to load from localStorage
+if (localStorage.getItem("attendees")) {
+  try {
+    attendees = JSON.parse(localStorage.getItem("attendees"));
+  } catch (e) {
+    attendees = [];
+  }
+}
 
 // Get celebration element
 const celebration = document.getElementById("celebration");
 const maxAttendees = 50;
 
 // Team counts
-const teamCounts = {
+let teamCounts = {
   water: 0,
   zero: 0,
   power: 0,
 };
+
+if (localStorage.getItem("teamCounts")) {
+  try {
+    teamCounts = JSON.parse(localStorage.getItem("teamCounts"));
+  } catch (e) {
+    teamCounts = { water: 0, zero: 0, power: 0 };
+  }
+}
 
 // Get DOM elements
 const checkInForm = document.getElementById("checkInForm");
@@ -28,6 +45,9 @@ const zeroCard = document.querySelector(".team-card.zero");
 const powerCard = document.querySelector(".team-card.power");
 
 function updateDisplay() {
+  // Save to localStorage
+  localStorage.setItem("attendees", JSON.stringify(attendees));
+  localStorage.setItem("teamCounts", JSON.stringify(teamCounts));
   // Hide celebration by default
   if (celebration) {
     celebration.style.display = "none";
@@ -151,6 +171,9 @@ checkInForm.addEventListener("submit", function (event) {
   attendees.push({ name: name, team: team });
   teamCounts[team]++;
   updateDisplay();
+  // Save to localStorage after update
+  localStorage.setItem("attendees", JSON.stringify(attendees));
+  localStorage.setItem("teamCounts", JSON.stringify(teamCounts));
   // Personalized greeting
   let teamLabel = "";
   if (team === "water") {
